@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "stfu",
+  "description": "Minimal response mode for AI agents with automatic prompt injection.",
+  "owner": {
+    "name": "ofabiodev",
+    "url": "https://github.com/ofabiodev"
+  },
+  "plugins": [
+    {
+      "name": "stfu",
+      "description": "Keep agent responses direct, concise, and focused on the requested result.",
+      "source": "./",
+      "version": "0.1.0",
+      "category": "productivity",
+      "tags": ["brevity", "minimal", "prompting", "hooks"]
+    }
+  ]
+}

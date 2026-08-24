@@ -24,7 +24,7 @@ export default async function stfuPlugin() {
       if (mode === 'off') return;
 
       const instructions = `STFU MODE ACTIVE\n\n${getInstructions()}`;
-      if (!Array.isArray(output.system)) output.system = [];
+      if (!Array.isArray(output.system)) return;
       if (output.system.length > 0) {
         output.system[output.system.length - 1] += `\n\n${instructions}`;
       } else {

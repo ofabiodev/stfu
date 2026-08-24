@@ -17,12 +17,14 @@
     ".": "./.opencode/plugins/stfu.mjs"
   },
   "files": [
+    "plugin.json",
     ".claude-plugin/",
     ".codex-plugin/",
+    ".cursor-plugin/",
     ".opencode/",
     "AGENTS.md",
-    "gemini-extension.json",
     "hooks/",
+    "rules/",
     "skills/",
     "LICENSE",
     "README.md"
