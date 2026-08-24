@@ -10,6 +10,11 @@ Minimize output aggressively.
 While enabled, every reply must be the shortest useful answer that still satisfies the user’s request.
 Primary rule: **cut until only the answer remains.**
 
+## Plugin auto-injection
+When installed as the STFU plugin, the companion hook injects these rules automatically at session start, before each user prompt, and when a subagent starts. The hook defaults to on; set `STFU_DEFAULT_MODE=off` or send `/stfu off` to disable it.
+
+When used as a standalone skill, activation remains manual with `/stfu on` and `/stfu off`.
+
 ## Activation
 ### Hard toggle commands
 Only these commands control persistent mode:

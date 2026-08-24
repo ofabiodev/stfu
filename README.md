@@ -1,100 +1,77 @@
 <p align="center">
- <img src="https://github.com/ofabiodev/stfu-skill/blob/main/.github/assets/logo.png" align="center" width="200" alt="STFU Logo">
+ <img src="https://github.com/ofabiodev/stfu/blob/main/.github/assets/logo.png" align="center" width="200" alt="STFU Logo">
  <h1 align="center">STFU</h1>
  <p align="center">
-  Minimal response mode for agents. No preamble, no recap, no filler.
+  Minimal response mode for agents — skill, plugin, and portable hook.
  </p>
 </p>
 <br/>
 
 <p align="center">
- <a href="https://skills.sh/ofabiodev/stfu-skill" rel="nofollow"><img alt="skills.sh" src="https://skills.sh/b/ofabiodev/stfu-skill"></a>
+ <a href="https://skills.sh/ofabiodev/stfu" rel="nofollow"><img alt="skills.sh" src="https://skills.sh/b/ofabiodev/stfu"></a>
  <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen"></a>
 </p>
 
-## Why STFU?
+## What it is
 
-STFU is a tiny Agent Skill for cleaner, shorter answers.
+STFU is a small, agent-portable response mode:
 
-It makes the agent respond directly, avoid unnecessary context, skip recaps, and keep output minimal by default.
+- `skills/stfu/SKILL.md` is the standalone skill.
+- `.codex-plugin/` and `.claude-plugin/` package it for Codex and Claude Code.
+- `hooks/hooks.json` injects the rules at session start, on every prompt, and for subagents.
+- `hooks/stfu-hook.js` is the shared runner for other agents with a lifecycle hook.
+- `AGENTS.md` and `gemini-extension.json` provide an instruction-only fallback.
+- `.opencode/` provides a native OpenCode system-prompt adapter.
 
-Use it when you want answers that are fast to read, low-noise, and focused only on the requested result.
+There is no single hook API shared by every agent. STFU keeps the behavior in one skill and makes each host integration thin.
 
 ## Installation
 
-<table>
-<tr>
-<td width="300">
+### Skill only
 
 ```bash
-# Using Bun
-bunx skills add ofabiodev/stfu-skill
-````
+# Bun
+bunx skills add ofabiodev/stfu
 
-</td>
-<td width="300">
+# NPM
+npx skills add ofabiodev/stfu
 
-```bash
-# Using NPM
-npx skills add ofabiodev/stfu-skill
+# Yarn
+yarn skills add ofabiodev/stfu
 ```
 
-</td>
-<td width="300">
+### Plugin checkout
 
 ```bash
-# Using Yarn
-yarn skills add ofabiodev/stfu-skill
+git clone https://github.com/ofabiodev/stfu.git
 ```
 
-</td>
-</tr>
-</table>
+Enable the checkout with the plugin manager of your agent. Codex and Claude Code discover the bundled `hooks/hooks.json`; review/trust the hook when the host asks. OpenCode can load the included `opencode.json` when started from the checkout.
+
+### Any hook-capable agent
+
+Point the host’s session-start or before-prompt hook at:
+
+```bash
+node /absolute/path/to/stfu/hooks/stfu-hook.js
+```
+
+The runner reads the usual hook JSON from stdin and returns the standard `hookSpecificOutput.additionalContext` shape used by Claude Code and Codex. For a host that injects stdout directly, set `STFU_HOOK_OUTPUT=plain` and, when needed, `STFU_HOOK_EVENT=UserPromptSubmit`.
 
 ## Usage
 
-Enable STFU mode:
-
-```text
-/stfu on
-```
-
-The agent replies:
-
-```text
-STFU mode on. Minimal answers only. 🔇
-```
-
-Disable STFU mode:
+The plugin is on by default. Disable or re-enable it with:
 
 ```text
 /stfu off
-```
-
-The agent replies:
-
-```text
-STFU mode off. Normal responses restored. 🔊
-```
-
-Example:
-
-```text
 /stfu on
 ```
 
-```text
-Explain what this error means:
-TypeError: Cannot read properties of undefined
-```
+Start disabled with `STFU_DEFAULT_MODE=off`. The standalone skill keeps the same commands but only becomes active when explicitly enabled.
 
-Expected style:
+## Portability
 
-```text
-You are reading a property from a value that is undefined.
-Check where the value is created or passed before accessing it.
-Say "expand" for more.
-```
+See [docs/agent-portability.md](docs/agent-portability.md) for the host matrix and [hooks/README.md](hooks/README.md) for the generic hook contract.
 
 ## License
 

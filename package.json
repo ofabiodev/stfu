@@ -1,0 +1,33 @@
+{
+  "name": "@ofabiodev/stfu",
+  "version": "0.1.0",
+  "description": "Minimal response mode for AI agents, with portable hook adapters.",
+  "license": "MIT",
+  "author": {
+    "name": "ofabiodev",
+    "url": "https://github.com/ofabiodev"
+  },
+  "homepage": "https://github.com/ofabiodev/stfu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ofabiodev/stfu.git"
+  },
+  "main": "./.opencode/plugins/stfu.mjs",
+  "exports": {
+    ".": "./.opencode/plugins/stfu.mjs"
+  },
+  "files": [
+    ".claude-plugin/",
+    ".codex-plugin/",
+    ".opencode/",
+    "AGENTS.md",
+    "gemini-extension.json",
+    "hooks/",
+    "skills/",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}

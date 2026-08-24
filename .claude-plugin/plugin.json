@@ -1,0 +1,15 @@
+{
+  "name": "stfu",
+  "version": "0.1.0",
+  "description": "Minimal response mode for agents, with automatic lifecycle hook injection.",
+  "author": {
+    "name": "ofabiodev",
+    "url": "https://github.com/ofabiodev"
+  },
+  "homepage": "https://github.com/ofabiodev/stfu",
+  "repository": "https://github.com/ofabiodev/stfu",
+  "license": "MIT",
+  "keywords": ["brevity", "minimal", "prompting", "productivity"],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
+}

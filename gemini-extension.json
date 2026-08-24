@@ -1,0 +1,6 @@
+{
+  "name": "stfu",
+  "version": "0.1.0",
+  "description": "Minimal response mode for agents.",
+  "contextFileName": "AGENTS.md"
+}
