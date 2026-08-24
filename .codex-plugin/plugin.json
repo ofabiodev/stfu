@@ -1,0 +1,29 @@
+{
+  "name": "stfu",
+  "version": "0.1.0",
+  "description": "Minimal response mode for agents, with an optional lifecycle hook that injects the rules into every conversation.",
+  "author": {
+    "name": "ofabiodev",
+    "url": "https://github.com/ofabiodev"
+  },
+  "homepage": "https://github.com/ofabiodev/stfu",
+  "repository": "https://github.com/ofabiodev/stfu",
+  "license": "MIT",
+  "keywords": ["brevity", "minimal", "prompting", "productivity"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "STFU",
+    "shortDescription": "Minimal response mode for agents",
+    "longDescription": "Keep agent responses direct and low-noise, with /stfu on and /stfu off controls and optional automatic hook injection.",
+    "developerName": "ofabiodev",
+    "category": "Productivity",
+    "capabilities": ["Instructions", "Lifecycle hooks"],
+    "websiteURL": "https://github.com/ofabiodev/stfu",
+    "defaultPrompt": [
+      "Turn on STFU mode.",
+      "Answer this with only the useful result.",
+      "Keep the next response concise."
+    ],
+    "brandColor": "#111111"
+  }
+}

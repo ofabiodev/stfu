@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-hook.js\"",
+            "timeout": 5,
+            "statusMessage": "Loading STFU mode"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-hook.js\"",
+            "timeout": 5,
+            "statusMessage": "Applying STFU mode"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-hook.js\"",
+            "timeout": 5,
+            "statusMessage": "Loading STFU mode for subagent"
+          }
+        ]
+      }
+    ]
+  }
+}
