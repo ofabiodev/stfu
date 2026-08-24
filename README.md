@@ -19,7 +19,6 @@ STFU is one skill with four native adapters:
 - `skills/stfu/SKILL.md` is the portable skill.
 - Codex and Claude Code use the shared standard plugin hook definition.
 - Cursor uses a native always-applied rule through its plugin manifest.
-- OpenCode uses its native system-prompt transform and command hook.
 
 The adapters all read the same skill text. No generic hook installer or unsupported provider adapter is included.
 
@@ -49,18 +48,6 @@ Submit `https://github.com/ofabiodev/stfu` at [cursor.com/marketplace/publish](h
 
 For local development, place the repository at `~/.cursor/plugins/local/stfu` and reload the Cursor window.
 
-### OpenCode
-
-From a checkout, the included `opencode.json` loads the native adapter automatically:
-
-```bash
-git clone https://github.com/ofabiodev/stfu.git
-cd stfu
-opencode
-```
-
-After the package is published to npm, add `@ofabiodev/stfu` to the `plugin` array in your project’s `opencode.json`.
-
 ### Standalone skill
 
 ```bash
@@ -69,7 +56,7 @@ npx skills add ofabiodev/stfu
 
 ## Usage
 
-The plugin is on by default in Codex, Claude Code, and OpenCode. Disable or re-enable it with:
+The plugin is on by default in Codex and Claude Code. Disable or re-enable it with:
 
 ```text
 /stfu off
@@ -84,10 +71,9 @@ Start disabled with `STFU_DEFAULT_MODE=off`. Cursor uses an always-applied rule;
 | --- | --- | --- | --- | --- |
 | Codex | `.codex-plugin/` | Session, prompt, and subagent injection | Yes | Hooks require review/trust in Codex |
 | Claude Code | `.claude-plugin/` | Session, prompt, and subagent injection | Yes | Hooks require normal Claude trust approval |
-| OpenCode | `.opencode/` | System prompt every turn | Yes | npm installation waits for package publication |
 | Cursor | `.cursor-plugin/` + `rules/` | Always-applied native rule | No runtime toggle | Cursor rules cannot be dynamically disabled by `/stfu off`; disable the plugin |
 
-Not bundled: Gemini, Copilot, Cline, Windsurf, Aider, Qoder, Devin, Pi, and generic hook-only adapters.
+Not bundled: OpenCode, Gemini, Copilot, Cline, Windsurf, Aider, Qoder, Devin, Pi, and generic hook-only adapters.
 
 See [docs/agent-portability.md](docs/agent-portability.md) for the exact files and host limitations.
 

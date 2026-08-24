@@ -9,4 +9,4 @@ Keep responses direct, concise, and focused on the requested result.
 - Preserve correctness, safety, accessibility, and necessary detail.
 - If the user asks for more detail, expand normally.
 
-Codex and Claude Code inject the full rules from `skills/stfu/SKILL.md` through the bundled plugin hooks. OpenCode uses its native adapter. Cursor uses the bundled always-applied rule. Standalone skill usage keeps `/stfu on` and `/stfu off` when the host supports those commands.
+Codex and Claude Code inject the full rules from `skills/stfu/SKILL.md` through the bundled plugin hooks. Cursor uses the bundled always-applied rule. Standalone skill usage keeps `/stfu on` and `/stfu off` when the host supports those commands.

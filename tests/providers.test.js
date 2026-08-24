@@ -39,7 +39,6 @@ test('ships the native manifests and adapters for every supported provider', () 
     'hooks/stfu-activate.js',
     'hooks/stfu-prompt.js',
     'hooks/stfu-subagent.js',
-    '.opencode/plugins/stfu.mjs',
   ]) {
     assert.equal(fs.existsSync(path.join(root, relativePath)), true, relativePath);
   }

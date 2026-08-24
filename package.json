@@ -12,16 +12,11 @@
     "type": "git",
     "url": "git+https://github.com/ofabiodev/stfu.git"
   },
-  "main": "./.opencode/plugins/stfu.mjs",
-  "exports": {
-    ".": "./.opencode/plugins/stfu.mjs"
-  },
   "files": [
     "plugin.json",
     ".claude-plugin/",
     ".codex-plugin/",
     ".cursor-plugin/",
-    ".opencode/",
     "AGENTS.md",
     "hooks/",
     "rules/",
