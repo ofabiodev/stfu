@@ -11,6 +11,7 @@
   "license": "MIT",
   "keywords": ["brevity", "minimal", "prompting", "productivity"],
   "skills": "./skills/",
+  "hooks": "./hooks/claude-codex-hooks.json",
   "interface": {
     "displayName": "STFU",
     "shortDescription": "Minimal response mode for agents",

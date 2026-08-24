@@ -1,14 +1,13 @@
-# Agent portability
+# Provider support
 
-STFU has one source of truth: `skills/stfu/SKILL.md`. Host integrations only decide how that text reaches the model.
+STFU has one source of truth: `skills/stfu/SKILL.md`. Each supported host uses its native packaging and lifecycle format.
 
-| Host | Integration | Automatic injection |
-| --- | --- | --- |
-| Codex | `.codex-plugin/plugin.json` + `hooks/hooks.json` | Session, every prompt, and subagent start |
-| Claude Code | `.claude-plugin/plugin.json` + `hooks/hooks.json` | Session, every prompt, and subagent start |
-| OpenCode | `opencode.json` + `.opencode/plugins/stfu.mjs` | System prompt on every turn |
-| Gemini CLI | `gemini-extension.json` + `AGENTS.md` | Context file on every session |
-| Other hook-capable agents | `hooks/stfu-hook.js` | Wire it to the host's before-prompt/session-start event |
-| Instruction-only agents | `AGENTS.md` or the skill file | Whenever the host loads that file |
+| Provider | Files | Automatic behavior | Toggle support | Status |
+| --- | --- | --- | --- | --- |
+| Codex | `.codex-plugin/plugin.json` + `hooks/claude-codex-hooks.json` | `SessionStart`, `UserPromptSubmit`, `SubagentStart` | `/stfu on/off` | Full |
+| Claude Code | `.claude-plugin/plugin.json` + `hooks/claude-codex-hooks.json` | `SessionStart`, `UserPromptSubmit`, `SubagentStart` | `/stfu on/off` | Full |
+| Cursor | `.cursor-plugin/plugin.json` + `rules/stfu.mdc` | Native `alwaysApply` rule | Plugin enable/disable only | Supported with host limitation |
 
-There is no universal hook schema across all agents. The shared runner uses the Claude/Codex event names and output shape, while `STFU_HOOK_OUTPUT=plain` covers hosts that inject stdout directly. A new adapter should stay thin and call the runner rather than copy the rules.
+Cursor’s standard `beforeSubmitPrompt` hook can validate or block a prompt, but it cannot return additional context. STFU therefore uses Cursor’s native always-applied rule instead of pretending the Codex/Claude hook output is portable.
+
+The repository intentionally does not ship adapters for other providers. Those are out of scope until they have a native integration and a tested lifecycle contract.

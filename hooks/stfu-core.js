@@ -55,6 +55,10 @@ function parseModeCommand(prompt) {
   return match ? match[1].toLowerCase() : null;
 }
 
+function isStfuCommand(prompt) {
+  return /^\/stfu(?:\s|$)/i.test(String(prompt || '').trim());
+}
+
 function getInstructions() {
   try {
     const skill = fs.readFileSync(SKILL_PATH, 'utf8');
@@ -77,7 +81,11 @@ function getCommandResponse(mode, previousMode) {
     : `🔊 STFU ${already}off.`;
 }
 
-function buildContext({ mode, command, previousMode }) {
+function buildContext({ mode, command, previousMode, invalidCommand = false }) {
+  if (invalidCommand) {
+    return 'STFU command received. Reply exactly:\n⚠️ Use `/stfu on` or `/stfu off`.';
+  }
+
   if (command === 'off') {
     return `STFU command received. Reply exactly:\n${getCommandResponse('off', previousMode)}`;
   }
@@ -95,6 +103,7 @@ module.exports = {
   getDefaultMode,
   getInstructions,
   getStatePath,
+  isStfuCommand,
   normalizeMode,
   parseModeCommand,
   readMode,

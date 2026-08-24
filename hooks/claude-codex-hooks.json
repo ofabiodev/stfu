@@ -2,10 +2,11 @@
   "hooks": {
     "SessionStart": [
       {
+        "matcher": "startup|resume|clear|compact",
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-hook.js\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-activate.js\"",
             "timeout": 5,
             "statusMessage": "Loading STFU mode"
           }
@@ -17,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-hook.js\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-prompt.js\"",
             "timeout": 5,
             "statusMessage": "Applying STFU mode"
           }
@@ -29,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-hook.js\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/stfu-subagent.js\"",
             "timeout": 5,
             "statusMessage": "Loading STFU mode for subagent"
           }

@@ -11,7 +11,7 @@ While enabled, every reply must be the shortest useful answer that still satisfi
 Primary rule: **cut until only the answer remains.**
 
 ## Plugin auto-injection
-When installed as the STFU plugin, the companion hook injects these rules automatically at session start, before each user prompt, and when a subagent starts. The hook defaults to on; set `STFU_DEFAULT_MODE=off` or send `/stfu off` to disable it.
+When installed in Codex or Claude Code, the companion plugin hooks inject these rules at session start, before each user prompt, and when a subagent starts. Cursor uses an always-applied native rule and is disabled by disabling the plugin. Codex and Claude Code default to on; set `STFU_DEFAULT_MODE=off` or send `/stfu off` to disable them.
 
 When used as a standalone skill, activation remains manual with `/stfu on` and `/stfu off`.
 

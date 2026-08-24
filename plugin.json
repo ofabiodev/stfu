@@ -1,7 +1,8 @@
 {
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "stfu",
   "version": "0.1.0",
-  "description": "Minimal response mode for agents, with automatic lifecycle hook injection.",
+  "description": "Keep agent responses direct, concise, and focused on the requested result.",
   "author": {
     "name": "ofabiodev",
     "url": "https://github.com/ofabiodev"
@@ -9,7 +10,5 @@
   "homepage": "https://github.com/ofabiodev/stfu",
   "repository": "https://github.com/ofabiodev/stfu",
   "license": "MIT",
-  "keywords": ["brevity", "minimal", "prompting", "productivity"],
-  "skills": "./skills/",
-  "hooks": "./hooks/claude-codex-hooks.json"
+  "keywords": ["brevity", "minimal", "prompting", "productivity"]
 }

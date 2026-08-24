@@ -2,7 +2,7 @@
  <img src="https://github.com/ofabiodev/stfu/blob/main/.github/assets/logo.png" align="center" width="200" alt="STFU Logo">
  <h1 align="center">STFU</h1>
  <p align="center">
-  Minimal response mode for agents — skill, plugin, and portable hook.
+  Minimal response mode for agents — skill plus native provider plugins.
  </p>
 </p>
 <br/>
@@ -14,64 +14,68 @@
 
 ## What it is
 
-STFU is a small, agent-portable response mode:
+STFU is one skill with four native adapters:
 
-- `skills/stfu/SKILL.md` is the standalone skill.
-- `.codex-plugin/` and `.claude-plugin/` package it for Codex and Claude Code.
-- `hooks/hooks.json` injects the rules at session start, on every prompt, and for subagents.
-- `hooks/stfu-hook.js` is the shared runner for other agents with a lifecycle hook.
-- `AGENTS.md` and `gemini-extension.json` provide an instruction-only fallback.
-- `.opencode/` provides a native OpenCode system-prompt adapter.
+- `skills/stfu/SKILL.md` is the portable skill.
+- Codex and Claude Code use the shared standard plugin hook definition.
+- Cursor uses a native always-applied rule through its plugin manifest.
 
-There is no single hook API shared by every agent. STFU keeps the behavior in one skill and makes each host integration thin.
+The adapters all read the same skill text. No generic hook installer or unsupported provider adapter is included.
 
 ## Installation
 
-### Skill only
+### Codex
 
 ```bash
-# Bun
-bunx skills add ofabiodev/stfu
+codex plugin marketplace add ofabiodev/stfu
+codex plugin add stfu@stfu
+```
 
-# NPM
+Run `codex`, open `/hooks`, review and trust the STFU hooks, then start a new thread.
+
+### Claude Code
+
+```text
+/plugin marketplace add ofabiodev/stfu
+/plugin install stfu@stfu
+```
+
+Run the two commands as separate prompts. Review the plugin hooks when Claude asks.
+
+### Cursor
+
+Submit `https://github.com/ofabiodev/stfu` at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). After approval, install **STFU** from Cursor → **Customize** → **Plugins**.
+
+For local development, place the repository at `~/.cursor/plugins/local/stfu` and reload the Cursor window.
+
+### Standalone skill
+
+```bash
 npx skills add ofabiodev/stfu
-
-# Yarn
-yarn skills add ofabiodev/stfu
 ```
-
-### Plugin checkout
-
-```bash
-git clone https://github.com/ofabiodev/stfu.git
-```
-
-Enable the checkout with the plugin manager of your agent. Codex and Claude Code discover the bundled `hooks/hooks.json`; review/trust the hook when the host asks. OpenCode can load the included `opencode.json` when started from the checkout.
-
-### Any hook-capable agent
-
-Point the host’s session-start or before-prompt hook at:
-
-```bash
-node /absolute/path/to/stfu/hooks/stfu-hook.js
-```
-
-The runner reads the usual hook JSON from stdin and returns the standard `hookSpecificOutput.additionalContext` shape used by Claude Code and Codex. For a host that injects stdout directly, set `STFU_HOOK_OUTPUT=plain` and, when needed, `STFU_HOOK_EVENT=UserPromptSubmit`.
 
 ## Usage
 
-The plugin is on by default. Disable or re-enable it with:
+The plugin is on by default in Codex and Claude Code. Disable or re-enable it with:
 
 ```text
 /stfu off
 /stfu on
 ```
 
-Start disabled with `STFU_DEFAULT_MODE=off`. The standalone skill keeps the same commands but only becomes active when explicitly enabled.
+Start disabled with `STFU_DEFAULT_MODE=off`. Cursor uses an always-applied rule; disable the STFU plugin in Cursor to turn it off.
 
-## Portability
+## Provider support
 
-See [docs/agent-portability.md](docs/agent-portability.md) for the host matrix and [hooks/README.md](hooks/README.md) for the generic hook contract.
+| Provider | Native package | Automatic behavior | `/stfu on/off` | Remaining limitation |
+| --- | --- | --- | --- | --- |
+| Codex | `.codex-plugin/` | Session, prompt, and subagent injection | Yes | Hooks require review/trust in Codex |
+| Claude Code | `.claude-plugin/` | Session, prompt, and subagent injection | Yes | Hooks require normal Claude trust approval |
+| Cursor | `.cursor-plugin/` + `rules/` | Always-applied native rule | No runtime toggle | Cursor rules cannot be dynamically disabled by `/stfu off`; disable the plugin |
+
+Not bundled: OpenCode, Gemini, Copilot, Cline, Windsurf, Aider, Qoder, Devin, Pi, and generic hook-only adapters.
+
+See [docs/agent-portability.md](docs/agent-portability.md) for the exact files and host limitations.
 
 ## License
 
